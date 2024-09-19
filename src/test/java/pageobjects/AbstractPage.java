@@ -1,5 +1,7 @@
 package pageobjects;
 
+import java.time.Duration;
+
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,14 +27,14 @@ public class AbstractPage {
         driver.get(url);
     }
 
-    @Step("Нажать на эелемент, согласно локатору")
+    @Step("Нажать на элемент, согласно локатору")
     public void click(By elementLocator) {
         waitElementToBeVisible(elementLocator);
-        waitElementToBeClikcable(elementLocator);
+        waitElementToBeClickable(elementLocator);
         try {
             driver.findElement(elementLocator).click();
         } catch (Exception e) {
-            System.out.println("Не удалось нажать посредством стандратного метода WebElement.click()" + e.getMessage());
+            System.out.println("Не удалось нажать посредством стандартного метода WebElement.click()" + e.getMessage());
             try {
                 clickViaJS(elementLocator);
             } catch (Exception eJS) {
@@ -46,17 +48,14 @@ public class AbstractPage {
         waitElementToBeVisible(elementLocator);
         WebElement nameHtmlElement = driver.findElement(elementLocator);
         boolean isNameHtmlElementStale = ExpectedConditions.stalenessOf(nameHtmlElement).apply(driver);
-
-        // if the element is stale
         if (isNameHtmlElementStale) {
-            // re-retrieving the desired input HTML element
             nameHtmlElement = driver.findElement(elementLocator);
         }
 
         try {
             nameHtmlElement.sendKeys(inputText);
         } catch (Exception e) {
-            System.out.println("Не удалось ввести даные посредством стандратного метода WebElement.sendKeys()" + e.getMessage());
+            System.out.println("Не удалось ввести данные посредством стандартного метода WebElement.sendKeys()" + e.getMessage());
             try {
                 sendKeysViaJS(elementLocator, inputText);
             } catch (Exception eJS) {
@@ -65,27 +64,27 @@ public class AbstractPage {
         }
     }
 
-    @Step("Ожидание кликабельности элемента")
-    public void waitElementToBeClikcable(By element) {
-        new WebDriverWait(driver, 10)
+    @Step("Ожидание доступности элемента")
+    public void waitElementToBeClickable(By element) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     @Step("Ожидание перехода по адресу")
     public void waitUrlToBe(String url) {
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.urlToBe(url));
     }
 
     @Step("Ожидание отображение элемента")
     public void waitElementToBeVisible(By elementLocator) {
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
     }
 
     @Step("Ожидание пока элемент не пропадет")
     public void waitUntilNotVisibilityOfElementLocated(WebElement element) {
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.invisibilityOf(element));
     }
 

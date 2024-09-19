@@ -39,12 +39,12 @@ public class AbstractTest {
     protected WebDriver getWebDriver(String browserName) {
         switch (browserName) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--start-maximized", "--disable-dev-shm-usage", "--remote-allow-origins=*");
                 return new ChromeDriver(chromeOptions);
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 return new FirefoxDriver(firefoxOptions);
             default:
