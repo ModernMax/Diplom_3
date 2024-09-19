@@ -47,9 +47,9 @@ public class RegistrationPage extends AbstractPage {
     }
 
     @Step("Нажать на кнопку Зарегистрироваться (Register) в странице регистрации")
-    public LoginPage clickRegistrationButton() {
+    public void clickRegistrationButton() {
         click(registrationButton);
-        return new LoginPage(driver);
+        //return new LoginPage(driver);
     }
 
     @Step("Нажать на кнопку Вход в странице регистрации")

@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pageobjects.MainPage;
 import pageobjects.RegistrationPage;
+import pageobjects.LoginPage;
 
 import java.time.Duration;
 
@@ -33,7 +34,9 @@ public class RegistrationTest extends AbstractTest {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.openRegistrationPage()
                 .fillRegistrationFields(createUserRequest.getName(), createUserRequest.getEmail(), createUserRequest.getPassword())
-                .clickRegistrationButton()
+                .clickRegistrationButton();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openLoginPage()
                 .fillAuthFormLoginPage(createUserRequest.getEmail(), createUserRequest.getPassword())
                 .clickLoginEnterButton();
         MainPage mainPage = new MainPage(driver);

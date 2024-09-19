@@ -51,8 +51,6 @@ public class AbstractTest {
                 throw new RuntimeException("Incorrect BrowserName");
         }
     }
-
-
     @Before
     @Step("setUp")
     public void setUp() {

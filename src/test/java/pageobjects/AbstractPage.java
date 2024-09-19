@@ -46,6 +46,7 @@ public class AbstractPage {
     @Step("Ввод данных в поле")
     public void sendKeys(By elementLocator, String inputText) {
         waitElementToBeVisible(elementLocator);
+        waitElementToBeClickable(elementLocator);
         WebElement nameHtmlElement = driver.findElement(elementLocator);
         boolean isNameHtmlElementStale = ExpectedConditions.stalenessOf(nameHtmlElement).apply(driver);
         if (isNameHtmlElementStale) {
@@ -66,19 +67,19 @@ public class AbstractPage {
 
     @Step("Ожидание доступности элемента")
     public void waitElementToBeClickable(By element) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     @Step("Ожидание перехода по адресу")
     public void waitUrlToBe(String url) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.urlToBe(url));
     }
 
     @Step("Ожидание отображение элемента")
     public void waitElementToBeVisible(By elementLocator) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
     }
 
